@@ -1,7 +1,8 @@
 class Account < ApplicationRecord
-	belongs_to :user
-	belongs_to :merchant
-	has_many :debit_payments, :class_name => 'Payment', :foreign_key => 'debit_id'
-  has_many :credit_payments, :class_name => 'Payment', :foreign_key => 'credit_id'
-
+	belongs_to :ownerable, polymorphic: true
+	
+  def update_balance!(amount)
+  	self.balance = self.balance = amount
+  	save!
+  end
 end

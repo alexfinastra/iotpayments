@@ -4,7 +4,7 @@ class CreateDevices < ActiveRecord::Migration[5.1]
     	t.integer :user_id
     	t.string :serial_number
     	t.string :name
-    	t.string :group
+    	t.string :device_type
     	t.string :description
       t.timestamps
     end
