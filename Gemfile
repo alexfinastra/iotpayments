@@ -33,6 +33,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'jquery-rails'
 gem 'bootstrap'
 gem 'delayed_job'
 gem 'delayed_job_active_record'
