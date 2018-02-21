@@ -28,7 +28,7 @@ namespace :payment do
 						ethereum_reference: SecureRandom.hex.to_s,
 						amount: c[1],
 						currency: "VTK",
-						lifecycle: 0 #rand(0..c[2]) 
+						lifecycle: rand(0..3) 
 					})				
 				end
   		end
