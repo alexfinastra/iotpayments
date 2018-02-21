@@ -13,7 +13,6 @@
       <th>owner</th>
       <th>merchant</th>
       <th>amount</th>
-      <th>currency</th>
       <th>status</th>
       <th></th>
     </tr>
@@ -26,10 +25,28 @@
         <td class="align-middle"><%= payment.debitable.name %></td>
         <td class="align-middle"><%= payment.debitable.user.mobile_number %></td>
         <td class="align-middle"><%= payment.creditable.name %></td>
-        <td class="align-middle"><%= payment.amount %></td>
-        <td class="align-middle"><%= payment.currency %></td>
-        <td class="align-middle">complete</td>
-        <td class="align-middle"><i class="fa fa-file-code-o fa-2x"></i></td>        
+        <td class="align-middle font-weight-bold"><%= number_to_currency(payment.amount, unit: " " + payment.currency, format: "%n%u") %></td>
+        <td class="align-middle text-success"><h6>final</h6></td>
+        <td class="align-middle">
+          <button type="button" class="btn btn-light" data-container="body" data-toggle="popover" data-placement="left" data-content="<FndtMsg xmlns='http://fundtech.com/SCL/CommonTypes'>
+      <Msg>
+        <Pmnt>
+          <Document xmlns='urn:iso:std:iso:20022:tech:xsd:pain.001.001.03'>
+            <CstmrCdtTrfInitn>
+              <GrpHdr>
+                <MsgId>1956107176</MsgId>
+                <!--param-->
+                <CreDtTm>2016-12-19T06:19:06</CreDtTm>
+                <!--param-->
+                <NbOfTxs>1</NbOfTxs>
+                <CtrlSum>1000</CtrlSum>
+                <InitgPty>
+                  <Nm>National DH Bank Plc</Nm>
+                  <!--param-->
+                  <Id>
+                    <OrgId>
+                      <Othr> ..."><i class="fa fa-file-code-o fa-2x"></i></button>
+        </td>        
       </tr>
     <% end %>
   </tbody>
