@@ -72,8 +72,8 @@ class ContractsController < ApplicationController
  
   skip_before_action :verify_authenticity_token
   def button_registration
-    Rails.logger.info(params.inspect)  
-    Rails.logger.info(request.body.read)  
+    #Rails.logger.info(params.inspect)  
+    Rails.logger.info(request.raw_post())  
 
     respond_to do |format|            
       format.html {"text"}            
