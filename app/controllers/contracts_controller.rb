@@ -63,8 +63,7 @@ class ContractsController < ApplicationController
 
   def iotbutton
     # create contract
-    respond_to do |format|
-      format.html { redirect_to contracts_url, notice: 'Contract was successfully destroyed.' }
+    respond_to do |format|      
       format.json {puts "wow"}      
     end
   end
