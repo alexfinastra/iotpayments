@@ -61,6 +61,26 @@ class ContractsController < ApplicationController
     end
   end
 
+  def button
+    text = request.inspect    
+    respond_to do |format|
+      format.json {puts "wow"}
+      format.html  {puts "dsada"}
+    end
+  end
+
+ 
+  skip_before_action :verify_authenticity_token
+  def button_registration
+    Rails.logger.info (params.inspect)  
+
+    respond_to do |format|            
+      format.json {"text"}            
+    end
+  end
+    
+  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contract
