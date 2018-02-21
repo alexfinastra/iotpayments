@@ -61,31 +61,13 @@ class ContractsController < ApplicationController
     end
   end
 
-  def button
-    text = request.inspect    
+  def iotbutton
+    # create contract
     respond_to do |format|
       format.json {puts "wow"}
       format.html  {puts "dsada"}
     end
   end
-
- 
-  #skip_before_action :verify_authenticity_token
-  def button_registration
-    
-    Rails.logger(request.body.rewind)
-    Rails.logger(request.body.inspect)
-    request.body.rewind    
-    body = JSON.parse (request.body.rewind)
-    address = body["SubscribeURL"]
-    HTTParty.get(address)
-
-    respond_to do |format|            
-      format.text {address}            
-    end
-  end
-    
-  
 
   private
     # Use callbacks to share common setup or constraints between actions.
