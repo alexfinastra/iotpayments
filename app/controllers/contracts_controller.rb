@@ -73,6 +73,8 @@ class ContractsController < ApplicationController
   #skip_before_action :verify_authenticity_token
   def button_registration
     
+    Rails.logger(request.body.rewind)
+    Rails.logger(request.body.inspect)
     request.body.rewind    
     body = JSON.parse (request.body.rewind)
     address = body["SubscribeURL"]
