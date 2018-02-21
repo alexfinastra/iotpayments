@@ -32,7 +32,7 @@ namespace :upload do
 		    	user = User.create!({ 
 						name: data[:name], 
 						mobile_number: data[:mobile_number], 
-						address: "Local place #{i}", 
+						address: "Local place for #{data[:name]}", 
 						city: "Locacity", 
 						verification_code: SecureRandom.random_number(9999).to_s.rjust(4, '0'), 
 						is_verified: true 

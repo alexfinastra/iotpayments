@@ -70,15 +70,16 @@ class ContractsController < ApplicationController
   end
 
  
-  skip_before_action :verify_authenticity_token
+  #skip_before_action :verify_authenticity_token
   def button_registration
-    #Rails.logger.info(params.inspect)  
-    puts "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-    Rails.logger.info(request.raw_post())  
-    puts "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    
+    request.body.rewind    
+    body = JSON.parse (request.body.rewind)
+    address = body["SubscribeURL"]
+    HTTParty.get(address)
 
     respond_to do |format|            
-      format.html {"text"}            
+      format.text {address}            
     end
   end
     
