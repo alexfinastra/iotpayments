@@ -64,7 +64,8 @@ class ContractsController < ApplicationController
   def iotbutton
     # create contract
     respond_to do |format|      
-      format.json {puts "wow"}      
+    format.json {puts "wow"}
+    format.html  {puts "dsada"}    
     end
   end
 
