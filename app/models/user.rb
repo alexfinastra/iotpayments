@@ -1,4 +1,6 @@
 require 'twilio-ruby'
+require 'sinatra'
+require 'rubygems'
 
 class User < ApplicationRecord
 	has_many :accounts, as: :ownerable
@@ -13,3 +15,4 @@ class User < ApplicationRecord
     )
   end
 end
+
