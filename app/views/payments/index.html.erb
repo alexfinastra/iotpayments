@@ -1,30 +1,35 @@
 <p id="notice"><%= notice %></p>
 
-<h1 class="text-center">Payments received from devices</h1>
+<div class="jumbotron">
+  <h1 class="display-4">Payments from devices</h1>
+  <p class="lead">Payments genreted by merchans and processed by  IoT Central. Each payment formatted in pain.001 (compliant with ISO 22002) format and wrapped with FNDT message feed the GPP systems and wait for completion. Once completed or cancelled a notification (SMS) message is sent to device owner.</p>  
+</div>
 
 <table class="table">
   <thead>
     <tr>
-      <th>#</th>
+      <th></th>
       <th>device</th>
-      <th>debit</th>
-      <th>credit</th>
+      <th>owner</th>
+      <th>merchant</th>
       <th>amount</th>
       <th>currency</th>
+      <th>status</th>
       <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @payments.each do |payment| %>
-      <tr>
-        <td><%= payment.id %></td>
+      <tr >        
         <td><%= image_tag asset_path("#{payment.debitable.device_type}.png"), class: "h-10" %></td>
-        <td><%= payment.debitable.user.accounts.first.number %></td>
-        <td><%= payment.creditable.accounts.first.number %></td>
-        <td><%= payment.amount %></td>
-        <td><%= payment.currency %></td>
-        <td><%= link_to 'message', payment.message %></td>
+        <td class="align-middle"><%= payment.debitable.name %></td>
+        <td class="align-middle"><%= payment.debitable.user.mobile_number %></td>
+        <td class="align-middle"><%= payment.creditable.name %></td>
+        <td class="align-middle"><%= payment.amount %></td>
+        <td class="align-middle"><%= payment.currency %></td>
+        <td class="align-middle">complete</td>
+        <td class="align-middle"><i class="fa fa-file-code-o fa-2x"></i></td>        
       </tr>
     <% end %>
   </tbody>
