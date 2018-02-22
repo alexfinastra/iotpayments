@@ -36,14 +36,20 @@ namespace :payment do
   end
 
 
- desc "trancate data"
- task truncate: :environment do
- 	ActiveRecord::Base.connection.execute("TRUNCATE accounts")
- 	ActiveRecord::Base.connection.execute("TRUNCATE contracts")
- 	ActiveRecord::Base.connection.execute("TRUNCATE delayed_jobs")
- 	ActiveRecord::Base.connection.execute("TRUNCATE devices")
- 	ActiveRecord::Base.connection.execute("TRUNCATE merchants")
- 	ActiveRecord::Base.connection.execute("TRUNCATE payments")
- 	ActiveRecord::Base.connection.execute("TRUNCATE users")
- end
+	desc "trancate data"
+	task truncate: :environment do
+		ActiveRecord::Base.connection.execute("TRUNCATE accounts")
+		ActiveRecord::Base.connection.execute("TRUNCATE contracts")
+		ActiveRecord::Base.connection.execute("TRUNCATE delayed_jobs")
+		ActiveRecord::Base.connection.execute("TRUNCATE devices")
+		ActiveRecord::Base.connection.execute("TRUNCATE merchants")
+		ActiveRecord::Base.connection.execute("TRUNCATE payments")
+		ActiveRecord::Base.connection.execute("TRUNCATE users")
+	end
+
+ 	desc "clear payments data"
+	task clear: :environment do
+		ActiveRecord::Base.connection.execute("TRUNCATE contracts")
+		ActiveRecord::Base.connection.execute("TRUNCATE payments")
+	end
 end
