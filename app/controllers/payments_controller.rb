@@ -4,7 +4,7 @@ class PaymentsController < ApplicationController
   # GET /payments
   # GET /payments.json
   def index
-    @payments = Payment.order("id DESC").limit(15).all
+    @payments = Payment.order("id DESC").limit(10).all
   end
 
   # GET /payments/1
