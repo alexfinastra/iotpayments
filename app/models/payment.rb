@@ -9,6 +9,22 @@ class Payment < ApplicationRecord
   	self.creditable.accounts.each{|a| a.update_balance!(self.amount)}
   end
 
+  def status
+  	statuses = ['received from merchant', 'notification send', 'payment request generated', 'payment approved', 'payment completed']
+  	statuses[rand(0..4)]
+  end
+
+  def progress
+  	progress_h = {
+  		'received from merchant' => 20, 
+  		'notification send' => 40, 
+  		'payment request generated' => 60, 
+  		'payment approved' => 80, 
+  		'payment completed' => 100
+  	}
+  	progress_h[status]
+  end
+
   def self.pain001 
   	return Nokogiri::XML("<FndtMsg xmlns='http://fundtech.com/SCL/CommonTypes'>
 		  <Msg>

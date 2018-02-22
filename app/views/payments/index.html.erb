@@ -5,53 +5,35 @@
   <p class="lead">Payments genreted by merchans and processed by  IoT Central. Each payment formatted in pain.001 (compliant with ISO 22002) format and wrapped with FNDT message feed the GPP systems and wait for completion. Once completed or cancelled a notification (SMS) message is sent to device owner.</p>  
 </div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th></th>
-      <th>device</th>
-      <th>owner</th>
-      <th>merchant</th>
-      <th>amount</th>
-      <th>status</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @payments.each do |payment| %>
-      <tr >        
-        <td><%= image_tag asset_path("#{payment.debitable.device_type}.png"), class: "h-10" %></td>
-        <td class="align-middle"><%= payment.debitable.name %></td>
-        <td class="align-middle"><%= payment.debitable.user.mobile_number %></td>
-        <td class="align-middle"><%= payment.creditable.name %></td>
-        <td class="align-middle font-weight-bold"><%= number_to_currency(payment.amount, unit: " " + payment.currency, format: "%n%u") %></td>
-        <td class="align-middle text-success"><h6>final</h6></td>
-        <td class="align-middle">
-          <button type="button" class="btn btn-light" data-container="body" data-toggle="popover" data-placement="left" data-content="<FndtMsg xmlns='http://fundtech.com/SCL/CommonTypes'>
-      <Msg>
-        <Pmnt>
-          <Document xmlns='urn:iso:std:iso:20022:tech:xsd:pain.001.001.03'>
-            <CstmrCdtTrfInitn>
-              <GrpHdr>
-                <MsgId>1956107176</MsgId>
-                <!--param-->
-                <CreDtTm>2016-12-19T06:19:06</CreDtTm>
-                <!--param-->
-                <NbOfTxs>1</NbOfTxs>
-                <CtrlSum>1000</CtrlSum>
-                <InitgPty>
-                  <Nm>National DH Bank Plc</Nm>
-                  <!--param-->
-                  <Id>
-                    <OrgId>
-                      <Othr> ..."><i class="fa fa-file-code-o fa-2x"></i></button>
-        </td>        
+<div class="container">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr class="row">
+        <th class="col-sm-2"></th>
+        <th class="col-sm-3">device name</th>
+        <th class="col-sm-2">owner</th>
+        <th class="col-sm-3">status</th>
+        <th class="col-sm-2"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @payments.each do |payment| %>
+        <tr class="row">        
+          <td class="align-middle col-sm-2"><%= image_tag asset_path("#{payment.debitable.device_type}.png") %></td>
+          <td class="align-middle font-weight-bold col-sm-3"><%= payment.debitable.name %></td>
+          <td class="align-middle col-sm-2"><%= payment.debitable.user.mobile_number %></td>
+          <td class="align-middle text-success col-sm-3"><h6><%= payment.status%></h6></td>
+          <td class="align-middle col-sm-2">
+           <div class="progress">
+              <div class="progress-bar bg-success" role="progressbar" style="width: <%=payment.progress%>%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </td>        
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
+  <br>
+</div>
 <!--%= link_to 'New Payment', new_payment_path %-->

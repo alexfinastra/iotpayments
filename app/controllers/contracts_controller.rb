@@ -64,8 +64,8 @@ class ContractsController < ApplicationController
 
   def iotbutton
     # create contract
-   #xml = Nokogiri::XML()
-   render xml:  "<?xml version='1.0' encoding='UTF-8'?><Response> <Message>The Robots are coming! Head for the hills!</Message></Response>"
+    #xml = Nokogiri::XML()
+    render xml:  "<?xml version='1.0' encoding='UTF-8'?><Response> <Message>The Robots are coming! Head for the hills!</Message></Response>"   
   end
 
   private
