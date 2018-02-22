@@ -71,6 +71,7 @@ class PaymentsController < ApplicationController
   def notification
     puts params[:pid]
     @payment = Payment.where(pid: params[:pid]).first
+    render :layout => false
   end
 
   private
