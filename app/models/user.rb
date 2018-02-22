@@ -5,6 +5,7 @@ class User < ApplicationRecord
 	has_many :devices
 
 	def send_notification(pid)
+		return if self.mobile_number.blank?
     @twilio_client = Twilio::REST::Client.new(Rails.application.secrets.twilio_sid, Rails.application.secrets.twilio_token) 
     @twilio_client.api.account.messages.create(
       :from => Rails.application.secrets.twilio_phone_number,
@@ -14,6 +15,7 @@ class User < ApplicationRecord
   end
 
   def send_confirmation()
+  	return if self.mobile_number.blank?
     @twilio_client = Twilio::REST::Client.new(Rails.application.secrets.twilio_sid, Rails.application.secrets.twilio_token) 
     @twilio_client.api.account.messages.create(
       :from => Rails.application.secrets.twilio_phone_number,
