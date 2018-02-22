@@ -23,12 +23,6 @@ class Contract < ApplicationRecord
 			})
 
 		sleep 5
-
-		puts "Inspect payment after created : #{p.inspect}"
-		if (device && device.user.mobile_number.black?)
-			
-		else
-			p.notified!
-		end
+		p.notified!		
 	end
 end
