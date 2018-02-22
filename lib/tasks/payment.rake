@@ -15,7 +15,7 @@ namespace :payment do
 			'microvawe'=> [['warranty', 40.00, 60],['maintenance', 10.00, 30]]
 		}
   	
-    User.where(is_verified: true).all.each do |user|
+    User.where(mobile_number: nil).all.each do |user|
   		user.devices.each do |device|  	
 				contract_types_by_device_types[device.device_type].each do |c|					
 					puts "setup for is #{c.inspect}"

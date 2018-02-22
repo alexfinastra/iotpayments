@@ -5,7 +5,7 @@ class Contract < ApplicationRecord
 	after_create_commit :process_contract
 	after_update_commit :feed_payment
 
-	def process_contract()
+	def process_contract()		
 		ProcessContractJob.set(wait: self.lifecycle.minute).perform_later(self)
 	end
 
@@ -22,7 +22,13 @@ class Contract < ApplicationRecord
       	state: 'received'
 			})
 
-		sleep 10
-		p.notified!
+		sleep 5
+
+		puts "Inspect payment after created : #{p.inspect}"
+		if (device && device.user.mobile_number.black?)
+			
+		else
+			p.notified!
+		end
 	end
 end
