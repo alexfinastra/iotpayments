@@ -23,7 +23,7 @@
           <td class="align-middle col-sm-2"><%= image_tag asset_path("#{payment.debitable.device_type}.png") %></td>
           <td class="align-middle font-weight-bold col-sm-3"><%= payment.debitable.name %></td>
           <td class="align-middle col-sm-2"><%= payment.debitable.user.mobile_number %></td>
-          <td class="align-middle text-success col-sm-3"><h6><%= payment.status%></h6></td>
+          <td class="align-middle text-success col-sm-3"><h6><%= payment.status_desc%></h6></td>
           <td class="align-middle col-sm-2">
            <div class="progress">
               <div class="progress-bar bg-success" role="progressbar" style="width: <%=payment.progress%>%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>

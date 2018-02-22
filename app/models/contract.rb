@@ -10,7 +10,7 @@ class Contract < ApplicationRecord
 	end
 
 	def feed_payment()
-		Payment.create!({
+		p = Payment.create!({
 				pid: SecureRandom.hex.to_s,
         debitable: self.device,
       	creditable: self.merchant,
@@ -18,7 +18,11 @@ class Contract < ApplicationRecord
     		currency: self.currency,
     		reference: self.ethereum_reference,
     	  value_date: Time.now,
-      	message: Payment.pain001
+      	message: Payment.pain001,
+      	state: 'received'
 			})
+
+		sleep 10
+		p.notified!
 	end
 end

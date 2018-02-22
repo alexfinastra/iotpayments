@@ -1,0 +1,38 @@
+<!--Card Dark-->
+<div class="card">
+  <!--Card image-->
+  <div class="view overlay">
+    <%= image_tag asset_path("dog.jpg"), width: "100%", height: "100%" %>      
+    <a>
+      <div class="mask rgba-white-slight"></div>
+    </a>
+  </div>
+  <div class="card-body elegant-color white-text">    
+    <h2 class="card-title">Order Confirmation</h2>
+    <hr class="hr-light">    <!--Text-->
+    
+    <h5 style="line-height:1.6;">
+        Hi <%= @payment.debitable.user.name %> , <br> 
+        Device <b> <%= @payment.debitable.name %> </b> created an order on your behlaf <br>
+        Order will be shipped to <%= @payment.debitable.user.address %>  , <%= @payment.debitable.user.city %> <br>
+        Total cost of order is: <%= number_to_currency(@payment.amount, unit: " " + @payment.currency, format: "%n%u") %><br>
+        Order ID is <%= @payment.reference %><br> 
+    </h5>         
+    <br/>
+    <button type="button" class="btn btn-lg btn-success" style="text-align:center;width:200px;" onclick=redirect()>Confirm</button> 
+    <button type="button" class="btn btn-lg btn-link" style="text-align:center;width:200px;" onclick=decline()>Decline</button>   
+  </div>       
+  <!--/.Card content-->
+</div>
+<!--/.Card Dark-->
+
+<script>
+function redirect()
+{
+  location.href = "http://iotpay.herokuapp.com/payments/confirm/<%= @payment.pid %>";
+} 
+function decline()
+{
+  alert('WTF !!!')
+} 
+</script>

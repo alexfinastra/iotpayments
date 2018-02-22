@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'securerandom'
 
-seed_size = 100
+seed_size = 20
 
 #users
 users_arr = []
@@ -20,7 +20,7 @@ users_arr = []
 		verification_code: SecureRandom.random_number(9999).to_s.rjust(4, '0'), 
 		is_verified: false })
 end
-User.delete_all
+#User.delete_all
 users = User.create(users_arr)
 puts "Users : #{users.size}" 
 
@@ -38,7 +38,14 @@ devices_types = ['coffe-machine', 'air-conditioner', 'tv', 'thermometer', 'car',
 			})
 	end	
 end
-Device.delete_all
+#Device.delete_all
+devices_arr.push({
+		  user: User.where(mobile_number: '0542022424').first, 
+			serial_number: SecureRandom.uuid.to_s, 
+			name: "Amazon dash button" , 
+			device_type: 'iotbutton', 
+			description: "Amazon dash button for you"
+	})
 devices = Device.create(devices_arr)
 puts "Devices : #{devices.size}" 
 
@@ -57,6 +64,13 @@ devices_types.each do |type|
 	end
 end
 Merchant.delete_all
+merchants_arr.push({
+		name: "IoT dash button",
+		device_type: 'iotbutton', 
+		phone_number: "03-#{SecureRandom.random_number(999).to_s}-#{SecureRandom.random_number(9999).to_s}", 
+		address: "Local place on Amazon", 
+		city: "Locacity"
+	})
 merchants = Merchant.create(merchants_arr) 
 puts "Merchants : #{merchants.size}" 
 

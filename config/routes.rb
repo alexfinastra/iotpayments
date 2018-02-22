@@ -9,5 +9,8 @@ Rails.application.routes.draw do
   root :to => "payments#index"
   
   get '/contracts/iotbutton', to: "contracts#iotbutton"
+  get '/payments/confirmed/:pid', to: "payments#confirmed"
+  get '/payments/notification/:pid', to: "payments#notification"
+  
 end
 

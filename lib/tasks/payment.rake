@@ -28,11 +28,22 @@ namespace :payment do
 						ethereum_reference: SecureRandom.hex.to_s,
 						amount: c[1],
 						currency: "VTK",
-						lifecycle: rand(0..3) 
+						lifecycle: rand(0..2) 
 					})				
 				end
   		end
   	end
   end
 
+
+ desc "trancate data"
+ task truncate: :environment do
+ 	ActiveRecord::Base.connection.execute("TRUNCATE accounts")
+ 	ActiveRecord::Base.connection.execute("TRUNCATE contracts")
+ 	ActiveRecord::Base.connection.execute("TRUNCATE delayed_jobs")
+ 	ActiveRecord::Base.connection.execute("TRUNCATE devices")
+ 	ActiveRecord::Base.connection.execute("TRUNCATE merchants")
+ 	ActiveRecord::Base.connection.execute("TRUNCATE payments")
+ 	ActiveRecord::Base.connection.execute("TRUNCATE users")
+ end
 end

@@ -4,25 +4,72 @@ class Payment < ApplicationRecord
 
   after_commit :update_accounts_balance
 
+  include AASM
+
+  aasm column: :state do
+    state :received, initial: true
+    state :notified
+    state :generated
+    state :approved
+    state :completed
+    
+    event :notified do    	
+      transitions from: :received, to: :notified, :after => :notify_user
+    end
+    event :feed do
+    	after do
+        sleep 5
+        self.approve!
+      end
+      transitions from: :notified, to: :generated
+    end    
+    event :approve do
+    	after do
+        sleep 5
+        self.complete!
+      end
+      transitions from: :generated, to: :approved
+    end
+    event :complete do
+    	after do
+        sleep 5
+        debitable.user.send_confirmation
+      end
+      transitions from: :approved, to: :completed
+    end
+  end
+
+  def notify_user
+  	self.debitable.user.send_notification(self.pid)
+  end
+
+
   def update_accounts_balance
   	self.debitable.user.accounts.each{|a| a.update_balance!(self.amount)}
   	self.creditable.accounts.each{|a| a.update_balance!(self.amount)}
   end
 
-  def status
-  	statuses = ['received from merchant', 'notification send', 'payment request generated', 'payment approved', 'payment completed']
-  	statuses[rand(0..4)]
+  def status_desc
+  	statuses = {
+  		'received' => 'received from merchant', 
+  		'notified' => 'notification send to owner', 
+  		'generated' => 'payment request send to hub', 
+  		'approved' => 'payment approved by bank', 
+  		'completed' => 'completion message sent'
+  	}
+
+  	statuses[self.state]
   end
 
   def progress
   	progress_h = {
-  		'received from merchant' => 20, 
-  		'notification send' => 40, 
-  		'payment request generated' => 60, 
-  		'payment approved' => 80, 
-  		'payment completed' => 100
+  		'received' => 20, 
+  		'notified' => 40, 
+  		'generated' => 60, 
+  		'approved' => 80, 
+  		'completed' => 100
   	}
-  	progress_h[status]
+  	progress_h[self.state]
   end
 
   def self.pain001 

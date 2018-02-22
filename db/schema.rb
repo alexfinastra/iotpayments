@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180219152351) do
+ActiveRecord::Schema.define(version: 20180222085538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 20180219152351) do
     t.xml "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "state"
     t.index ["creditable_type", "creditable_id"], name: "index_payments_on_creditable_type_and_creditable_id"
     t.index ["debitable_type", "debitable_id"], name: "index_payments_on_debitable_type_and_debitable_id"
   end

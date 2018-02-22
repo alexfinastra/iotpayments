@@ -61,6 +61,18 @@ class PaymentsController < ApplicationController
     end
   end
 
+  def confirmed
+    puts params[:pid]
+    @payment = Payment.where(pid: params[:pid]).first
+    @payment.feed!
+    render text: "OPA !!!"
+  end
+
+  def notification
+    puts params[:pid]
+    @payment = Payment.where(pid: params[:pid]).first
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_payment

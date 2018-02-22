@@ -65,6 +65,16 @@ class ContractsController < ApplicationController
   def iotbutton
     # create contract
     #xml = Nokogiri::XML()
+    device = Device.where(device_type: 'iotbutton').first
+    Contract.create!({            
+            contract_type: 'iotbutton',
+            device: device,
+            description: "Contract for #{device.name} of #{device.device_type} type, signed at #{Time.now.to_s(:long)}",
+            ethereum_reference: SecureRandom.hex.to_s,
+            amount: '1.00',
+            currency: "VTK",
+            lifecycle: 0 
+          })  
     render xml:  "<?xml version='1.0' encoding='UTF-8'?><Response> <Message>The Robots are coming! Head for the hills!</Message></Response>"   
   end
 
