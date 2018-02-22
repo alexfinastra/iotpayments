@@ -65,7 +65,7 @@ class PaymentsController < ApplicationController
     puts params[:pid]
     @payment = Payment.where(pid: params[:pid]).first
     @payment.feed!
-    render text: "OPA !!!"
+    render :layout => false
   end
 
   def notification
