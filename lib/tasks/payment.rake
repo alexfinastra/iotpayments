@@ -51,5 +51,6 @@ namespace :payment do
 	task clear: :environment do
 		ActiveRecord::Base.connection.execute("TRUNCATE contracts")
 		ActiveRecord::Base.connection.execute("TRUNCATE payments")
+		ActiveRecord::Base.connection.execute("TRUNCATE delayed_jobs")
 	end
 end
