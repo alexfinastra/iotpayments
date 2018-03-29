@@ -43,6 +43,25 @@ class Payment < ApplicationRecord
   	self.debitable.user.send_notification(self.pid)
   end
 
+  def railsbank_transaction
+		@railsbank = Railsbank::Client.new(
+		  api: Rails.application.secrets.railsbank_url,
+		  access_token: Rails.application.secrets.railsbank_api_key
+		)
+
+		ledger = @railsbank.ledgers.find(self.debitable.user.accounts.first.ledger_id)
+		beneficiary = @railsbank.beneficiaries.find(self.creditable.beneficiary_id)
+		
+		transaction = Railsbank::Transaction.new(
+			type: 'out-ledger',
+	    ledger: ledger,
+	    beneficiary: beneficiary ,   
+	    payment_type: 'payment-type-EU-SEPA-Step2',
+	    amount: self.amount
+	  )
+
+		self.reference = @railsbank.transactions.create(transaction)
+	end
 
   def update_accounts_balance
   	self.debitable.user.accounts.each{|a| a.update_balance!(self.amount)}

@@ -41,6 +41,10 @@ gem 'creek'
 gem 'httparty'
 gem 'twilio-ruby'
 gem 'aasm'
+gem 'virtus', '~> 1.0.3'
+gem 'resource_kit', '~> 0.1.5'
+gem 'kartograph', '~> 0.2.3'
+gem 'faraday', '~> 0.9'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -48,6 +52,7 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'simplecov'
 end
 
 group :development do

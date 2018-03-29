@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180222085538) do
+ActiveRecord::Schema.define(version: 20180322045115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20180222085538) do
     t.string "currency"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "ledger_id"
     t.index ["ownerable_type", "ownerable_id"], name: "index_accounts_on_ownerable_type_and_ownerable_id"
   end
 
@@ -73,6 +74,8 @@ ActiveRecord::Schema.define(version: 20180222085538) do
     t.string "city"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "enduser_id"
+    t.string "beneficiary_id"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -102,6 +105,7 @@ ActiveRecord::Schema.define(version: 20180222085538) do
     t.boolean "is_verified"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "enduser_id"
   end
 
 end

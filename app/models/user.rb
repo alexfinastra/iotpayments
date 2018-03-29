@@ -4,6 +4,18 @@ class User < ApplicationRecord
 	has_many :accounts, as: :ownerable
 	has_many :devices
 
+	before_create :railsbank_onboard
+
+	def railsbank_onboard
+		@railsbank = Railsbank::Client.new(
+		  api: Rails.application.secrets.railsbank_url,
+		  access_token: Rails.application.secrets.railsbank_api_key
+		)
+
+		enduser = Railsbank::EndUser.new(type: 'person', name: self.name)
+		self.enduser_id = @railsbank.end_users.create(enduser)
+	end
+
 	def send_notification(pid)
 		return if self.mobile_number.blank?		
 	    @twilio_client = Twilio::REST::Client.new(Rails.application.secrets.twilio_sid, Rails.application.secrets.twilio_token) 

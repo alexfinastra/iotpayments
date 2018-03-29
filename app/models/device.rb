@@ -8,4 +8,8 @@ class Device < ApplicationRecord
 	def has_waiting_contracts?(contract_type)
 		(self.contracts.where(contract_type: contract_type).where(merchant_id: nil).count > 0) ? true : false
 	end
+
+	def image_url
+		"https://iotpay.herokuapp.com/new_device.png"
+	end
 end
