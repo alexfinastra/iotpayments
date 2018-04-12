@@ -6,7 +6,7 @@ class Account < ApplicationRecord
   	save!
   end
 
-  before_create :railsbank_onboard
+  #before_create :railsbank_onboard
 
 	def railsbank_onboard
 		return if ownerable.blank?

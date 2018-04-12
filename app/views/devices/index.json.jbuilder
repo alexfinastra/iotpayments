@@ -6,7 +6,7 @@ json.messages ['template'] do |t|
 			json.image_aspect_ratio "square"
 			json.elements @devices do |d|
 				json.partial! partial: 'devices/device', locals: { device: d }
-			end
+			end			
 		end
 	end
 end

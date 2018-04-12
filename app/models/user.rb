@@ -4,7 +4,7 @@ class User < ApplicationRecord
 	has_many :accounts, as: :ownerable
 	has_many :devices
 
-	before_create :railsbank_onboard
+	#before_create :railsbank_onboard
 
 	def railsbank_onboard
 		@railsbank = Railsbank::Client.new(

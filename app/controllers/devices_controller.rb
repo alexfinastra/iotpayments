@@ -4,7 +4,9 @@ class DevicesController < ApplicationController
   # GET /devices
   # GET /devices.json
   def index
-    @devices = Device.all.limit(7)
+    @devices = Device.limit(6).all.to_a    
+    @devices << Device.new({name: "Add device", description: "Make a picture of code from the device" })
+    @devices
   end
 
   # GET /devices/1

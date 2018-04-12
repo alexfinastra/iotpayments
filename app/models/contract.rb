@@ -3,7 +3,7 @@ class Contract < ApplicationRecord
 	belongs_to :device, optional: true
 	
 	after_create_commit :process_contract
-	after_update_commit :feed_payment
+	#after_update_commit :feed_payment
 
 	def process_contract()		
 		ProcessContractJob.set(wait: self.lifecycle.minute).perform_later(self)

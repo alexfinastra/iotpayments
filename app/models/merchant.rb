@@ -4,7 +4,7 @@ class Merchant < ApplicationRecord
 	has_many :payments, as: :debitable
 	has_many :payments, as: :creditable
 
-	before_create :railsbank_onboard
+	#before_create :railsbank_onboard
 
 	def railsbank_onboard
 		@railsbank = Railsbank::Client.new(
