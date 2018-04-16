@@ -15,7 +15,7 @@ else
 	json.subtitle "Totaly payed: #{Payment.where(debitable_type: "Device", debitable_id: device.id).select("amount").all.inject(0.00){|sum, p| sum+=p.amount; sum}.to_s}"
 	json.buttons ["more ..."] do |title|
 		json.type "web_url"
-		json.url device_url(device, format: :json) 
+		json.url device_url(device, format: :html) 
 		json.title title
 	end
 end	
