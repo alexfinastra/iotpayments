@@ -10,7 +10,7 @@ class Device < ApplicationRecord
 	end
 
 	def image_url
-		"https://iotpay.herokuapp.com/images/-#{self.device_type}.png"
+		"https://iotpay.herokuapp.com/images/wide-#{self.device_type}.png"
 	end
 
 	def orig_image_url

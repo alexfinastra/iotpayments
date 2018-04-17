@@ -4,8 +4,8 @@
 json.title device.name
 if device.new_record?
 	json.subtitle device.description
-	json.image_url "https://iotpay.herokuapp.com/new_device.png"
-	json.buttons ["add new"] do |title|
+	json.image_url "https://iotpay.herokuapp.com/wide-newdevice.png"
+	json.buttons ["connect new"] do |title|
 		json.type "web_url"
 		json.url "/device/new" 
 		json.title title
