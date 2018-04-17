@@ -13,7 +13,7 @@ seed_size = 20
 users_arr = []
 (1..seed_size).each do |i|
 	users_arr.push({ 
-		name: "user_#{i}", 
+		name: "User #{i}", 
 		mobile_number: nil, 
 		address: "Local place #{i}", 
 		city: "Locacity", 

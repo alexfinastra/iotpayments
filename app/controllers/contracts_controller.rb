@@ -11,6 +11,7 @@ class ContractsController < ApplicationController
   # GET /contracts/1
   # GET /contracts/1.json
   def show
+    puts "The show must go on"
   end
 
   # GET /contracts/new
@@ -63,6 +64,7 @@ class ContractsController < ApplicationController
   end
 
   def iotbutton
+    puts "IoTPaY button pressed"
     # create contract
     #xml = Nokogiri::XML()
     device = Device.where(device_type: 'iotbutton').first
@@ -75,7 +77,7 @@ class ContractsController < ApplicationController
             currency: "VTK",
             lifecycle: 0 
           })  
-    render xml:  "<?xml version='1.0' encoding='UTF-8'?><Response> <Message>The Robots are coming! Head for the hills!</Message></Response>"   
+    render xml:  "<?xml version='1.0' encoding='UTF-8'?><Response> <Message>The Robots are coming! Head to the hills! Waot do u call it? IoTPaY</Message></Response>"   
   end
 
   private
