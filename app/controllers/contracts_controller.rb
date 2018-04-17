@@ -77,7 +77,13 @@ class ContractsController < ApplicationController
             currency: "VTK",
             lifecycle: 0 
           })  
-    render xml:  "<?xml version='1.0' encoding='UTF-8'?><Response> <Message>The Robots are coming! Head to the hills! Waot do u call it? IoTPaY</Message></Response>"   
+    render xml:  "<?xml version='1.0' encoding='UTF-8'?><Response> <Message>The Robots are coming! Head to the hills! Wot do u call it? IoTPaY</Message></Response>"   
+  end
+
+  def sns_confirm
+    puts "Params #{params.inspect}"
+    puts "#{params['SubscribeURL']}"
+    redirect_to params['SubscribeURL']
   end
 
   private
