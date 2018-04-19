@@ -1,30 +1,23 @@
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
 <!--Card Dark-->
-<div class="card">
-  <!--Card image-->
-  <div class="view overlay">
-    <%= image_tag asset_path("dog.jpg"), style: "hight: auto; width: 100%" %>      
-    <a>
-      <div class="mask rgba-white-slight"></div>
-    </a>
+<div class="container">
+  <div class="py-5 text-center">
+    <img class="d-block mx-auto mb-4" src=<%= @payment.debitable.orig_image_url%> alt="" width="72" height="72">
+    <h2><%= @payment.debitable.name %></h2>
+    <p class="lead text-left">
+      Hi <%= @payment.debitable.user.name %>, <br> 
+      Device <b> <%= @payment.debitable.name %> </b> created an order on your behalf <br>
+      Order will be shipped to <%= @payment.debitable.user.address %> , <%= @payment.debitable.user.city %> <br>
+      Total cost of order is: <%= number_to_currency(@payment.amount, unit: " " + @payment.currency, format: "%n%u") %><br>
+      Order ref number is: <%= @payment.reference %><br>
+    </p>    
+  </div> 
+  <div class="text-center">
+    <button type="button" class="btn btn-lg btn-success mr-4"  onclick=redirect()>Confirm</button> 
+    <button type="button" class="btn btn-lg btn-outline-secondary ml-4"  onclick=decline()>Decline</button>   
   </div>
-  <div class="card-body elegant-color white-text">    
-    <h2 class="card-title">Order Confirmation</h2>
-    <hr class="hr-light">    <!--Text-->
-    
-    <h5 style="line-height:1.6;">
-        Hi <%= @payment.debitable.user.name %> , <br> 
-        Device <b> <%= @payment.debitable.name %> </b> created an order on your behlaf <br>
-        Order will be shipped to <%= @payment.debitable.user.address %>  , <%= @payment.debitable.user.city %> <br>
-        Total cost of order is: <%= number_to_currency(@payment.amount, unit: " " + @payment.currency, format: "%n%u") %><br>
-        Order ID is <%= @payment.reference %><br> 
-    </h5>         
-    <br/>
-    <button type="button" class="btn btn-lg btn-success" style="text-align:center;width:200px;" onclick=redirect()>Confirm</button> 
-    <button type="button" class="btn btn-lg btn-link" style="text-align:center;width:200px;" onclick=decline()>Decline</button>   
-  </div>       
-  <!--/.Card content-->
 </div>
 <!--/.Card Dark-->
 
