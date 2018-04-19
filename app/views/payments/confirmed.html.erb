@@ -1,0 +1,15 @@
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+<!--Card Dark-->
+<div class="container">
+  <div class="py-5 text-center">
+    <img class="d-block mx-auto mb-4" src=<%= @payment.debitable.orig_image_url%> alt="" width="72" height="72">
+    <h2><%= @payment.debitable.name %></h2>
+    <p class="lead text-left">
+      Hi <%= @payment.debitable.user.name %>, <br> 
+      Payment confirmation is accepted and sent to clearing system.
+    </p>    
+  </div> 
+</div>
+
