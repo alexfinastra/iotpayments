@@ -22,7 +22,7 @@ class Contract < ApplicationRecord
       	state: 'received'
 			})
 
-		sleep 10
+		sleep 5
 		p.notified!		
 	end
 end

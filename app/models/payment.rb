@@ -71,7 +71,7 @@ class Payment < ApplicationRecord
 
   def confirmed_dummy
   	 if(self.notified? && self.debitable.user.mobile_number.blank?)
-	  	sleep 20
+	  	sleep 5
 	  	feed!
 	  end
   end
