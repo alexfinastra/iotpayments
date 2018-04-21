@@ -3,7 +3,7 @@ class ProcessContractJob < ApplicationJob
   queue_as :default
 
   def perform(contract)
-		Rails.logger.info(" Workinf wiht the contract #{contract.inspect}")
+		Rails.logger.info(" Working with the contract #{contract.inspect}")
   	type = contract.device.device_type
   	return if type.blank?
 

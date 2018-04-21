@@ -11,36 +11,45 @@ seed_size = 20
 
 #users
 users_arr = []
-(1..seed_size).each do |i|
+users_arr.push({
+		name: "Alex", 
+		mobile_number: '0526116531', 
+		address: "Novotel Paddington", 
+		city: "London", 
+		verification_code: SecureRandom.random_number(9999).to_s.rjust(4, '0'), 
+		is_verified: false
+	})
+(2..seed_size).each do |i|
 	users_arr.push({ 
 		name: "User #{i}", 
 		mobile_number: nil, 
-		address: "Local place #{i}", 
-		city: "Locacity", 
+		address: "Central Street #{i}", 
+		city: "London", 
 		verification_code: SecureRandom.random_number(9999).to_s.rjust(4, '0'), 
 		is_verified: false })
 end
+
 #User.delete_all
 users = User.create(users_arr)
 puts "Users : #{users.size}" 
 
 # devices
 devices_arr = []
-devices_types = ['coffe-machine', 'air-conditioner', 'tv', 'thermometer', 'car', 'washing-machine', 'fridge', 'solar', 'bulb', 'microvawe']
-(1..seed_size).each do |i| 
+devices_types = ['coffee-machine', 'air-conditioner', 'tv', 'thermometer', 'car', 'washing-machine', 'fridge', 'solar', 'bulb', 'microvawe']
+(2..seed_size).each do |i| 
 	devices_types.each do |type|
 		devices_arr.push({
 			user: users[i-1], 
 			serial_number: SecureRandom.uuid.to_s, 
-			name: "device_#{type}_-#{SecureRandom.random_number(9999).to_s}" , 
+			name: "#{type} #{SecureRandom.random_number(9999).to_s}" , 
 			device_type: type, 
-			description: "IoT #{type}"
+			description: "IoT #{type} for human usage"
 			})
 	end	
 end
 #Device.delete_all
 devices_arr.push({
-		  user: User.where(mobile_number: '0542022424').first, 
+		  user: User.where(mobile_number: '0526116531').first, 
 			serial_number: SecureRandom.uuid.to_s, 
 			name: "Amazon dash button" , 
 			device_type: 'iotbutton', 
@@ -55,11 +64,11 @@ merchants_arr = []
 devices_types.each do |type|
 	(1..merchants_size).each do |i|
 		merchants_arr.push({
-			name: "merchant_#{type}_#{i}",
+			name: "Merchant #{type} #{i}",
 			device_type: type, 
 			phone_number: "03-#{SecureRandom.random_number(999).to_s}-#{SecureRandom.random_number(9999).to_s}", 
-			address: "Local place #{i}", 
-			city: "Locacity"
+			address: "Any valid street #{i}", 
+			city: "London"
 		})
 	end
 end
@@ -80,8 +89,8 @@ accounts_arr = []
 	accounts_arr.push({
     ownerable: users[i-1],
     number: SecureRandom.random_number(999999999).to_s,
-    bank: "LOCAL",
-    currency: "VTK"
+    bank: "Railsbank",
+    currency: "GBP"
    })
 end	
 
@@ -89,8 +98,8 @@ end
 	accounts_arr.push({
     ownerable: merchants[i-1],
     number: SecureRandom.random_number(999999999).to_s,
-    bank: "LOCAL",
-    currency: "VTK"
+    bank: "Railsbank",
+    currency: "GBP"
    })
 end
 Account.delete_all

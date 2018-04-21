@@ -67,14 +67,15 @@ class ContractsController < ApplicationController
     puts "IoTPaY button pressed"
     # create contract
     #xml = Nokogiri::XML()
-    device = Device.where(device_type: 'iotbutton').first
+    user = User.where.not(mobile_number: nil).first
+    device = user.devices.where(device_type: 'iotbutton').first
     Contract.create!({            
             contract_type: 'iotbutton',
             device: device,
             description: "Contract for #{device.name} of #{device.device_type} type, signed at #{Time.now.to_s(:long)}",
             ethereum_reference: SecureRandom.hex.to_s,
             amount: '1.00',
-            currency: "VTK",
+            currency: "GBP",
             lifecycle: 0 
           })  
     render xml:  "<?xml version='1.0' encoding='UTF-8'?><Response> <Message>The Robots are coming! Head to the hills! Wot do u call it? IoTPaY</Message></Response>"   

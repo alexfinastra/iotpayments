@@ -3,6 +3,7 @@ class Payment < ApplicationRecord
   belongs_to :creditable, polymorphic: true
 
   after_commit :update_accounts_balance
+  after_update_commit :confirmed_dummy
 
   include AASM
 
@@ -66,6 +67,13 @@ class Payment < ApplicationRecord
   def update_accounts_balance
   	self.debitable.user.accounts.each{|a| a.update_balance!(self.amount)}
   	self.creditable.accounts.each{|a| a.update_balance!(self.amount)}
+  end
+
+  def confirmed_dummy
+  	 if(self.notified? && self.debitable.user.mobile_number.blank?)
+	  	sleep 20
+	  	feed!
+	  end
   end
 
   def status_desc

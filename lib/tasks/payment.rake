@@ -3,7 +3,7 @@ namespace :payment do
   desc "schedule payments generation"
   task schedule: :environment do
   	contract_types_by_device_types = {
-			'coffe-machine' => [['warranty', 100.00, 60],['subscription', 5.00, 10],['maintenance', 20, 30]], 
+			'coffee-machine' => [['warranty', 100.00, 60],['subscription', 5.00, 10],['maintenance', 20, 30]], 
 			'air-conditioner'=> [['warranty', 120.00, 60],['maintenance', 70.00, 30]],  
 			'tv'=> [['warranty', 80.00, 60],['subscription', 1.00, 30]],  
 			'thermometer'=> [['warranty', 20.00, 60]],  
@@ -27,7 +27,7 @@ namespace :payment do
 						description: "Contract for #{device.name} of #{c[0]} type, signed at #{Time.now.to_s(:long)}",
 						ethereum_reference: SecureRandom.hex.to_s,
 						amount: c[1],
-						currency: "VTK",
+						currency: "GBP",
 						lifecycle: rand(0..2) 
 					})				
 				end
