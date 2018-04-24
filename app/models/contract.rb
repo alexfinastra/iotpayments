@@ -6,7 +6,7 @@ class Contract < ApplicationRecord
 	after_update_commit :feed_payment
 
 	def process_contract()		
-		ProcessContractJob.set(wait: self.lifecycle.second).perform_later(self)
+		ProcessContractJob.set(wait: self.lifecycle.minute).perform_later(self)
 	end
 
 	def feed_payment()
