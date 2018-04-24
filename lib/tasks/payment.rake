@@ -28,7 +28,7 @@ namespace :payment do
 						ethereum_reference: SecureRandom.hex.to_s,
 						amount: c[1],
 						currency: "GBP",
-						lifecycle: rand(0..2) 
+						lifecycle: rand(5..20) 
 					})				
 				end
   		end
