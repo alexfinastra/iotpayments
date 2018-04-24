@@ -82,7 +82,7 @@ class ContractsController < ApplicationController
   end
 
   def sns_confirm
-    Rails.logger.info params.inspect
+    #Rails.logger.info params.inspect
     puts "Params #{params.inspect}"
     puts "#{params['SubscribeURL']}"
     redirect_to params['SubscribeURL']
