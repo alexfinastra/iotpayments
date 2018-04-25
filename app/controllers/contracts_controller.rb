@@ -85,8 +85,8 @@ class ContractsController < ApplicationController
   def sns_confirm
     puts "---------------!!!!!!!!------------------"
     puts "Params #{params.inspect}"
-    puts "#{params['SubscribeURL']}"
-    redirect_to params['SubscribeURL']
+    #puts "#{params['SubscribeURL']}"
+    redirect_to root_path
   end
 
   private
