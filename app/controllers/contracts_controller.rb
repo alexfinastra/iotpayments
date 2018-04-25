@@ -1,7 +1,8 @@
 class ContractsController < ApplicationController
   before_action :set_contract, only: [:show, :edit, :update, :destroy]
+  #protect_from_forgery with: :null_session
+  skip_before_action :verify_authenticity_token
 
-  
   # GET /contracts
   # GET /contracts.json
   def index
