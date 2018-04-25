@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   
   get '/contracts/iotbutton/', to: "contracts#iotbutton"
   post '/contracts/sns_confirm/', to: "contracts#sns_confirm"
+  post '/contracts/iotbutton/', to: "contracts#sns_confirm"
   get '/payments/confirmed/:pid', to: "payments#confirmed"
   get '/payments/notification/:pid', to: "payments#notification"
   
