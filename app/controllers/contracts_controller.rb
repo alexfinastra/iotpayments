@@ -87,7 +87,7 @@ class ContractsController < ApplicationController
     puts "Params #{params.inspect}"
     puts "okay #{JSON.parse request.raw_post}"
     #puts "#{params['SubscribeURL']}"
-    redirect_to root_path
+    redirect_to :action => "iotbutton"
   end
 
   private
