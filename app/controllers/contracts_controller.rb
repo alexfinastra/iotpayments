@@ -66,28 +66,14 @@ class ContractsController < ApplicationController
 
   def iotbutton
     puts "IoTPaY button pressed"
-    # create contract
-    #xml = Nokogiri::XML()
-    user = User.where.not(mobile_number: nil).first
-    device = user.devices.where(device_type: 'iotbutton').first
-    Contract.create!({            
-            contract_type: 'iotbutton',
-            device: device,
-            description: "Contract for #{device.name} of #{device.device_type} type, signed at #{Time.now.to_s(:long)}",
-            ethereum_reference: SecureRandom.hex.to_s,
-            amount: '1.00',
-            currency: "GBP",
-            lifecycle: 0 
-          })  
+    create_contract_iotbutton  
     render xml:  "<?xml version='1.0' encoding='UTF-8'?><Response> <Message>The Robots are coming! Head to the hills! Wot do u call it? IoTPaY</Message></Response>"   
   end
 
   def sns_confirm
-    puts "---------------!!!!!!!!------------------"
-    puts "Params #{params.inspect}"
     puts "okay #{JSON.parse request.raw_post}"
-    #puts "#{params['SubscribeURL']}"
-    redirect_to :action => "iotbutton"
+    create_contract_iotbutton
+    render xml:  "<?xml version='1.0' encoding='UTF-8'?><Response> <Message>The Robots are coming! Head to the hills! Wot do u call it? IoTPaY</Message></Response>"   
   end
 
   private
@@ -99,5 +85,19 @@ class ContractsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def contract_params
       params.fetch(:contract, {})
+    end
+
+    def create_contract_iotbutton
+      user = User.where.not(mobile_number: nil).first
+      device = user.devices.where(device_type: 'iotbutton').first
+      Contract.create!({            
+              contract_type: 'iotbutton',
+              device: device,
+              description: "Contract for #{device.name} of #{device.device_type} type, signed at #{Time.now.to_s(:long)}",
+              ethereum_reference: SecureRandom.hex.to_s,
+              amount: '1.00',
+              currency: "GBP",
+              lifecycle: 0 
+            })
     end
 end
