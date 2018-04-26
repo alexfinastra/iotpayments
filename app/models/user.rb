@@ -36,7 +36,7 @@ class User < ApplicationRecord
     )
   end
 
-  def send_loan()
+  def send_loan(pid)
   	return if self.mobile_number.blank?	
     @twilio_client = Twilio::REST::Client.new(Rails.application.secrets.twilio_sid, Rails.application.secrets.twilio_token) 
     @twilio_client.api.account.messages.create(

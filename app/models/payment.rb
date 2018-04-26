@@ -37,7 +37,7 @@ class Payment < ApplicationRecord
     event :loan do
     	after do
         sleep 5
-        debitable.user.send_loan
+        self.debitable.user.send_loan(self.pid)
       end
     	transitions from: :approved, to: :loaned
     end
