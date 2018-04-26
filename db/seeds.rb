@@ -12,8 +12,8 @@ seed_size = 20
 #users
 users_arr = []
 users_arr.push({
-		name: "Alex", 
-		mobile_number: '0526116531', 
+		name: "John", 
+		mobile_number: '0523669022', 
 		address: "Novotel Paddington", 
 		city: "London", 
 		verification_code: SecureRandom.random_number(9999).to_s.rjust(4, '0'), 
@@ -49,16 +49,16 @@ devices_types = ['coffee-machine', 'air-conditioner', 'tv', 'thermometer', 'car'
 end
 #Device.delete_all
 devices_arr.push({
-		  user: User.where(mobile_number: '0526116531').first, 
+		  user: User.where(mobile_number: '0523669022').first, 
 			serial_number: SecureRandom.uuid.to_s, 
 			name: "Amazon dash button" , 
 			device_type: 'iotbutton', 
 			description: "Amazon dash button for you"
 	})
 devices_arr.push({
-		  user: User.where(mobile_number: '0526116531').first, 
+		  user: User.where(mobile_number: '0523669022').first, 
 			serial_number: SecureRandom.uuid.to_s, 
-			name: "Finastra ID" , 
+			name: "Human" , 
 			device_type: 'pay', 
 			description: "Finastra Central Id for payments by account"
 	})
