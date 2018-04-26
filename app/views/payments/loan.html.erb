@@ -1,0 +1,45 @@
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!--Card Dark-->
+
+<div class="container">
+  <div class="py-5 text-center">
+    <img class="d-block mx-auto mb-4" src="/images/banklogo.jpg" alt="" width="250" height="125">
+    <p class="lead">
+      Hi John, the account balance is insufficient to purchase the "Rolex Sea Dweller".
+    </p>
+    <div class="card-body">
+      <h4 class="card-title pricing-card-title">Loan Proposal</h4>
+      <ul class="list-unstyled mt-3 mb-4">
+        <li>Load amount: $7,141</small></li>
+        <li>Loan term:<select required="">
+          <option value="6">6 Months</option>
+          <option value="12">12 Months</option>
+        </select></li>
+        <li><form action="">Automatic Payments 
+            <input type="radio" name="autoPayment"> Yes
+            <input type="radio" name="autoPayment"> No
+          </form>
+        </li>
+      </ul>      
+      <div class="text-center">
+        <button type="button" class="btn btn-lg btn-success mr-4"  onclick=redirect()>Confirm</button>
+        <button type="button" class="btn btn-lg btn-outline-secondary ml-4"  onclick=decline()>Decline</button>  
+      </div>
+    </div>
+    </p>   
+  </div>
+</div>
+<!--/.Card Dark-->
+<script>
+function redirect()
+{
+  location.href = "http://iotpay.herokuapp.com/payments/confirm_loan/<%= @payment.pid %>";
+}
+function decline()
+{
+  alert('Sorry, will be in touch with you later !!!')
+}
+</script>

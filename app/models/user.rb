@@ -35,4 +35,14 @@ class User < ApplicationRecord
       :body => "Hello, #{self.name}, the payment was processed succesfully. Thank you for purchase."
     )
   end
+
+  def send_loan()
+  	return if self.mobile_number.blank?	
+    @twilio_client = Twilio::REST::Client.new(Rails.application.secrets.twilio_sid, Rails.application.secrets.twilio_token) 
+    @twilio_client.api.account.messages.create(
+      :from => Rails.application.secrets.twilio_phone_number,
+      :to => "+972 " + self.mobile_number.sub(/^0/, ""),
+      :body => "Hi, #{self.name}, the account balance is insufficient. Please check bank loan proposal: https://iotpay.herokuapp.com/payments/loan/#{pid}"
+    )
+  end  
 end

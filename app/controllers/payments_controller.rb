@@ -68,6 +68,13 @@ class PaymentsController < ApplicationController
     render :layout => false
   end
 
+  def confirm_loan
+    puts params[:pid]
+    @payment = Payment.where(pid: params[:pid]).first
+    @payment.complete!
+    render :layout => false
+  end
+
   def notification
     puts params[:pid]
     @payment = Payment.where(pid: params[:pid]).first
@@ -75,6 +82,12 @@ class PaymentsController < ApplicationController
   end
 
   def purchase
+  end
+
+  def loan
+    puts params[:pid]
+    @payment = Payment.where(pid: params[:pid]).first
+    render :layout => false
   end
   
   private

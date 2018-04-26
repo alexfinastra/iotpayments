@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get '/payments/confirmed/:pid', to: "payments#confirmed"
   get '/payments/notification/:pid', to: "payments#notification"
   get '/payments/purchase', to: "payments#purchase"
+  get '/payments/confirm_loan/:pid', to: "payments#confirm_loan"
+  get '/payments/loan/:pid', to: "payments#loan"
 
   resources :contracts
   resources :merchants

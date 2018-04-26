@@ -30,11 +30,15 @@ class Payment < ApplicationRecord
     event :approve do
     	after do
         sleep 5
-        self.complete!
+        self.debitable.device_type.eql?('pay') ? self.loan! : self.complete!
       end
       transitions from: :generated, to: :approved
     end
     event :loan do
+    	after do
+        sleep 5
+        debitable.user.send_loan
+      end
     	transitions from: :approved, to: :loaned
     end
     event :complete do
@@ -42,7 +46,7 @@ class Payment < ApplicationRecord
         sleep 5
         debitable.user.send_confirmation
       end
-      transitions from: :approved, to: :completed
+      transitions from: [:approved, :loaned], to: :completed
     end
   end
 
@@ -77,7 +81,7 @@ class Payment < ApplicationRecord
 
   def confirmed_dummy
   	 if(self.notified? && self.debitable.user.mobile_number.blank?)
-	  	sleep 5
+	  	sleep 5	  	
 	  	feed!
 	  end
   end
