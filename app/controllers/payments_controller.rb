@@ -74,6 +74,9 @@ class PaymentsController < ApplicationController
     render :layout => false
   end
 
+  def purchase
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_payment

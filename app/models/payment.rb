@@ -1,3 +1,5 @@
+require 'cgi'
+
 class Payment < ApplicationRecord
 	belongs_to :debitable, polymorphic: true
   belongs_to :creditable, polymorphic: true
@@ -11,6 +13,7 @@ class Payment < ApplicationRecord
     state :received, initial: true
     state :notified
     state :generated
+    state :loaned
     state :approved
     state :completed
     
@@ -30,6 +33,9 @@ class Payment < ApplicationRecord
         self.complete!
       end
       transitions from: :generated, to: :approved
+    end
+    event :loan do
+    	transitions from: :approved, to: :loaned
     end
     event :complete do
     	after do
@@ -80,7 +86,8 @@ class Payment < ApplicationRecord
   	statuses = {
   		'received' => 'received from merchant', 
   		'notified' => 'notification send to owner', 
-  		'generated' => 'payment request send to hub', 
+  		'generated' => 'payment send to bank', 
+  		'loaned' => 'loan proposal send',
   		'approved' => 'payment approved by bank', 
   		'completed' => 'completion message sent'
   	}
@@ -90,13 +97,18 @@ class Payment < ApplicationRecord
 
   def progress
   	progress_h = {
-  		'received' => 20, 
-  		'notified' => 40, 
-  		'generated' => 60, 
-  		'approved' => 80, 
+  		'received' => 17, 
+  		'notified' => 34, 
+  		'generated' => 51,
+  		'loaned' => 68, 
+  		'approved' => 85, 
   		'completed' => 100
   	}
   	progress_h[self.state]
+  end
+
+  def format_message
+  	CGI.unescape(self.message)
   end
 
   def self.pain001 

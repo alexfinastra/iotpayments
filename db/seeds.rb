@@ -55,6 +55,13 @@ devices_arr.push({
 			device_type: 'iotbutton', 
 			description: "Amazon dash button for you"
 	})
+devices_arr.push({
+		  user: User.where(mobile_number: '0526116531').first, 
+			serial_number: SecureRandom.uuid.to_s, 
+			name: "Finastra ID" , 
+			device_type: 'pay', 
+			description: "Finastra Central Id for payments by account"
+	})
 devices = Device.create(devices_arr)
 puts "Devices : #{devices.size}" 
 

@@ -1,5 +1,5 @@
 class ContractsController < ApplicationController
-  before_action :set_contract, only: [:show, :edit, :update, :destroy]
+  before_action :set_contract, only: [:show, :edit, :update, :destroy, :payconfirm]
   #protect_from_forgery with: :null_session
   skip_before_action :verify_authenticity_token
 
@@ -64,15 +64,24 @@ class ContractsController < ApplicationController
     end
   end
 
+  def ecommerce
+    puts "ecommerce payment with finastra id"
+    create_contract('pay', '17147,00', "GBP", SecureRandom.hex.to_s)  
+    redirect_to :action => "payconfirm", :id => @contract.id
+  end
+
+  def payconfirm
+  end
+
   def iotbutton
     puts "IoTPaY button pressed"
-    create_contract_iotbutton  
+    create_contract('iotbutton', '1.00', "GBP", SecureRandom.hex.to_s)  
     render xml:  "<?xml version='1.0' encoding='UTF-8'?><Response> <Message>The Robots are coming! Head to the hills! Wot do u call it? IoTPaY</Message></Response>"   
   end
 
   def sns_confirm
     puts "okay #{JSON.parse request.raw_post}"
-    create_contract_iotbutton
+    create_contract('iotbutton', '1.00', "GBP", SecureRandom.hex.to_s)
     render xml:  "<?xml version='1.0' encoding='UTF-8'?><Response> <Message>The Robots are coming! Head to the hills! Wot do u call it? IoTPaY</Message></Response>"   
   end
 
@@ -87,16 +96,16 @@ class ContractsController < ApplicationController
       params.fetch(:contract, {})
     end
 
-    def create_contract_iotbutton
+    def create_contract(device_type, amount, currency, ref)
       user = User.where.not(mobile_number: nil).first
-      device = user.devices.where(device_type: 'iotbutton').first
-      Contract.create!({            
-              contract_type: 'iotbutton',
+      device = user.devices.where(device_type: device_type).first
+      @contract = Contract.create!({            
+              contract_type: device_type,
               device: device,
               description: "Contract for #{device.name} of #{device.device_type} type, signed at #{Time.now.to_s(:long)}",
-              ethereum_reference: SecureRandom.hex.to_s,
-              amount: '1.00',
-              currency: "GBP",
+              ethereum_reference: ref,
+              amount: amount,
+              currency: currency,
               lifecycle: 0 
             })
     end
