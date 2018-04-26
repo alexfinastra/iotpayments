@@ -87,6 +87,13 @@ merchants_arr.push({
 		address: "Local place on Amazon", 
 		city: "Locacity"
 	})
+merchants_arr.push({
+		name: "Ecommerce online merchant",
+		device_type: 'pay', 
+		phone_number: "03-#{SecureRandom.random_number(999).to_s}-#{SecureRandom.random_number(9999).to_s}", 
+		address: "Ecommerce Merchant", 
+		city: "Locacity"
+	})
 merchants = Merchant.create(merchants_arr) 
 puts "Merchants : #{merchants.size}" 
 
