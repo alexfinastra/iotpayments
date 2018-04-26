@@ -24,7 +24,10 @@
 <script>
 function redirect()
 {
-  location.href = "http://iotpay.herokuapp.com/payments/confirmed/<%= @payment.pid %>";
+  - if @payment.debitable.device_type.eql?("pay")
+    location.href = "http://iotpay.herokuapp.com/payments/loan/<%= @payment.pid %>";
+  - else
+    location.href = "http://iotpay.herokuapp.com/payments/confirmed/<%= @payment.pid %>";
 } 
 function decline()
 {
