@@ -89,9 +89,9 @@ class Payment < ApplicationRecord
   def status_desc
   	statuses = {
   		'received' => 'received from merchant', 
-  		'notified' => 'notification send to owner', 
+  		'notified' => 'notification sent to owner', 
   		'generated' => 'payment send to bank', 
-  		'loaned' => 'loan proposal send',
+  		'loaned' => 'loan proposal sent',
   		'approved' => 'payment approved by bank', 
   		'completed' => 'completion message sent'
   	}
