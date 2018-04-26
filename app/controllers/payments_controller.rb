@@ -87,6 +87,7 @@ class PaymentsController < ApplicationController
   def loan
     puts params[:pid]
     @payment = Payment.where(pid: params[:pid]).first
+    @payment.feed!
     render :layout => false
   end
   
